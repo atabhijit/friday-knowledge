@@ -1,0 +1,127 @@
+# Friday Knowledge Base Taxonomy
+#
+# Guides the agent when proposing knowledge PRs.
+# shared_categories: facts useful to all agents (stored in _shared/)
+# agents.<id>.categories: agent-specific knowledge
+#
+# The agent reads this file to decide where new knowledge belongs.
+# Human reviewers can override placement during PR review.
+
+shared_categories:
+  services:
+    description: "Service registry: names, owners, ports, dependencies"
+    path: _shared/services
+    examples:
+      - "payment-service runs on port 8080, owned by commerce team"
+      - "order-service depends on payment-service and inventory-service"
+
+  namespaces:
+    description: "Kubernetes namespace mappings and policies"
+    path: _shared/namespaces
+    examples:
+      - "payment-service runs in the finance namespace"
+      - "staging namespaces use resource quotas of 4 CPU / 8Gi"
+
+  teams:
+    description: "Team structure, ownership, oncall rotations, escalation paths"
+    path: _shared/teams
+    examples:
+      - "commerce team owns payment-service and order-service"
+      - "platform team oncall rotation is weekly, starting Monday"
+
+  architecture:
+    description: "System design decisions, infrastructure topology, conventions"
+    path: _shared/architecture
+    examples:
+      - "all services use Istio sidecars for mTLS"
+      - "production runs across us-east-1 and us-west-2"
+
+agents:
+  devops:
+    categories:
+      runbooks:
+        description: "Operational procedures for common tasks and incident response"
+        path: devops/runbooks
+        examples:
+          - "to restart payment-service, scale to 0 then back to 3"
+          - "when DynamoDB throttles, check the burst capacity dashboard"
+      tooling:
+        description: "Internal tool usage, CI/CD pipeline configuration"
+        path: devops/tooling
+        examples:
+          - "ArgoCD sync requires the devops-deployer role"
+          - "GitHub Actions runners are self-hosted on EKS"
+
+  security:
+    categories:
+      policies:
+        description: "Security policies, standards, approved configurations"
+        path: security/policies
+        examples:
+          - "all S3 buckets must have SSE-KMS encryption enabled"
+          - "IAM roles must not use inline policies"
+      compliance:
+        description: "Compliance requirements, audit findings, remediation"
+        path: security/compliance
+        examples:
+          - "SOC2 requires 90-day access reviews for production"
+          - "PCI scope includes payment-service and vault"
+
+  sre:
+    categories:
+      monitoring:
+        description: "Monitoring setup, alert thresholds, SLO definitions"
+        path: sre/monitoring
+        examples:
+          - "payment-service SLO: 99.9% availability, 200ms p99 latency"
+          - "alert: CPU > 80% for 5 minutes triggers PagerDuty"
+      incident-response:
+        description: "Incident playbooks, severity definitions, communication templates"
+        path: sre/incident-response
+        examples:
+          - "SEV1: page oncall, open bridge, notify VP Engineering within 15 min"
+          - "database failover procedure: promote read replica, update DNS"
+      postmortems:
+        description: "Past incident learnings and prevention measures"
+        path: sre/postmortems
+        examples:
+          - "2026-03-15: payment outage caused by DynamoDB partition hotspot"
+
+  cloud-engineering:
+    categories:
+      cost-optimization:
+        description: "Cost findings, savings opportunities, reserved instance plans"
+        path: cloud-engineering/cost-optimization
+        examples:
+          - "dev EKS cluster costs $2400/month, switch to Karpenter saves 40%"
+      architecture-patterns:
+        description: "Approved architecture patterns, reference designs"
+        path: cloud-engineering/architecture-patterns
+        examples:
+          - "new services must use ALB + target groups, not classic ELB"
+
+  it:
+    categories:
+      onboarding:
+        description: "New service and developer onboarding procedures"
+        path: it/onboarding
+        examples:
+          - "new developers need GitHub org invite + AWS SSO group assignment"
+      documentation:
+        description: "Internal documentation, wiki references, tool guides"
+        path: it/documentation
+        examples:
+          - "VPN setup guide is at confluence.internal/vpn-setup"
+
+  access-assist:
+    categories:
+      iam-roles:
+        description: "IAM role definitions, permission boundaries, role mappings"
+        path: access-assist/iam-roles
+        examples:
+          - "friday-k8s-reader role has read-only access to all namespaces"
+      rbac:
+        description: "Kubernetes RBAC policies, ClusterRole definitions"
+        path: access-assist/rbac
+        examples:
+          - "developers get edit role in their team namespace only"
