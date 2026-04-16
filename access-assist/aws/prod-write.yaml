@@ -1,0 +1,7 @@
+domain: aws
+resource: prod-write
+description: Write access to AWS production accounts
+groups:
+  - level: write
+    entra_group: aws-prod-write
+    description: Create or modify AWS resources in production

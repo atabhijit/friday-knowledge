@@ -1,0 +1,7 @@
+domain: github
+resource: org-admin
+description: GitHub organization administrator privileges
+groups:
+  - level: admin
+    entra_group: github-org-admins
+    description: Manage org repos, teams, and webhooks

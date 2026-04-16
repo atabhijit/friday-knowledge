@@ -1,0 +1,10 @@
+domain: k8s
+resource: prod
+description: Kubernetes cluster access for production environments
+groups:
+  - level: read
+    entra_group: k8s-prod-readonly
+    description: kubectl get / describe across prod namespaces
+  - level: admin
+    entra_group: k8s-prod-admin
+    description: kubectl edit / delete across prod namespaces

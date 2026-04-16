@@ -1,0 +1,10 @@
+domain: argocd
+resource: infra
+description: Infrastructure ArgoCD project (platform, networking, monitoring)
+groups:
+  - level: readonly
+    entra_group: argocd-infra-readonly
+    description: View app status, logs, sync history
+  - level: admin
+    entra_group: argocd-infra-admin
+    description: Sync, rollback, app configuration

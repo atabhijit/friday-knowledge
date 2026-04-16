@@ -125,3 +125,9 @@ agents:
         path: access-assist/rbac
         examples:
           - "developers get edit role in their team namespace only"
+      catalog:
+        description: "Service access catalog entries (ArgoCD, K8s, AWS, GitHub)"
+        path: access-assist
+        examples:
+          - "k8s namespace payment-service has readonly and admin levels"
+          - "ArgoCD commerce project maps to two Entra groups"

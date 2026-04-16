@@ -1,0 +1,7 @@
+domain: aws
+resource: prod-readonly
+description: Read-only access to AWS production accounts (EC2, S3, CloudWatch, IAM)
+groups:
+  - level: read
+    entra_group: aws-prod-readonly
+    description: View AWS production resources without modify rights

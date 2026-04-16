@@ -1,0 +1,16 @@
+policies:
+  - tier: team
+    squad: sre
+    grants:
+      - { domain: aws, resource: prod-readonly, level: read }
+      - { domain: k8s, resource: prod, level: read }
+  - tier: team
+    squad: platform
+    grants:
+      - { domain: aws, resource: prod-readonly, level: read }
+      - { domain: k8s, resource: prod, level: read }
+  - tier: team
+    squad: devops
+    grants:
+      - { domain: aws, resource: prod-readonly, level: read }
+      - { domain: k8s, resource: prod, level: read }
